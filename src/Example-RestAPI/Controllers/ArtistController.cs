@@ -33,7 +33,8 @@ namespace Example_RestAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Artist>> GetArtist(int id)
         {
-            var artist = await _context.Artists.FindAsync(id);
+            //use Include to have EF also query Album information.  Leaving it out makes the field NULL
+            var artist = await _context.Artists.Include("Albums").Where(a => a.ArtistId == id).FirstOrDefaultAsync();
             if (artist == null)
             {
                 return NotFound();

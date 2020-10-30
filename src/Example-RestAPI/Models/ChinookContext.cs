@@ -18,7 +18,6 @@ namespace Example_RestAPI.Models
         public DbSet<Artist> Artists { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseLazyLoadingProxies();
             options.UseSqlite("Data Source=chinook.db");
         }
     }
